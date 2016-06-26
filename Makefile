@@ -29,6 +29,7 @@ $(TARGET): $(OBJS)
 	$(CC) $(LIBS) $(OBJS) -o $(TARGET) 
 	rm $(OBJS)
 $(OBJS): $(SRCS)
+	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) $(RFLAGS) $(INC) -c $(SRCS)
 clean:
 	rm $(TARGET)
