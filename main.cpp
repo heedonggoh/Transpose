@@ -9,7 +9,7 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {  
   integer i, j, n;
   integer nRow, nCol;
@@ -17,14 +17,30 @@ int main()
   string *data;
   ifstream ifile;
   ofstream ofile;
-  
-  cout << "name of the file: ";
-  cin >> name;
-  cout << "number of rows: ";
-  cin >> nRow;
-  cout << "number of columns: ";
-  cin >> nCol;
 
+  switch(argc){
+  case 2:
+    name = argv[1];
+    cout << "number of rows: ";
+    cin >> nRow;
+    cout << "number of columns: ";
+    cin >> nCol;
+    break;
+  case 4:
+    name = argv[1];
+    nRow = atoi(argv[2]);
+    nCol = atoi(argv[3]);
+    break;
+  default:
+    cout << "name of the file: ";
+    cin >> name;
+    cout << "number of rows: ";
+    cin >> nRow;
+    cout << "number of columns: ";
+    cin >> nCol;
+    break;
+  }
+  
   ifile.open(name);
   n = nRow*nCol;
   data = new string[n];
