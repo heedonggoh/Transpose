@@ -18,7 +18,7 @@ CFLAGS = -Wall -Wextra -pedantic -std=c++11
 ## Release option
 RFLAGS = -O3
 ## DO NOT CHANGE ################################################
-.PHONY: all clean dep test help
+.PHONY: all clean test help
 
 TARGET = $(ODIR)/$(NAME)
 SRCS = $(wildcard $(SDIR)/*.$(SEXT))
@@ -29,19 +29,18 @@ $(TARGET): $(OBJS)
 	$(CC) $(LIBS) $(OBJS) -o $(TARGET) 
 	rm $(OBJS)
 $(OBJS): $(SRCS)
-	mkdir -p $(ODIR)
-	$(CC) $(CFLAGS) $(RFLAGS) $(INC) -c $(SRCS)
+	@mkdir -p $(ODIR)
+	$(CC) $(CFLAGS) $(RFLAGS) $(INC) -c $(SRCS) -o $(OBJS)
 clean:
 	rm $(TARGET)
 test:
-	@echo "Sources are: " $(SRCS)
-	@echo "Objects are: " $(OBJS)
+	@echo "Sources files: " $(SRCS)
+	@echo "Objects files: " $(OBJS)
+	@echo "Executable:    " $(TARGET)
 help:
 	@echo "usage:"
-	@echo "      make -> build"
-	@echo "      make dep -> generates dependencies using gccmakedep"
-	@echo "      make clean -> removes objects, executable"
-	@echo "      make test -> lists source files"
-dep :
-	gccmakedep $(INC) $(SRCS)
+	@echo "      make       -> build"
+	@echo "      make clean -> removes executable"
+	@echo "      make test  -> lists source files"
 #################################################################
+
